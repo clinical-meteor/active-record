@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:active-record',
-  version: '1.0.9',
+  version: '1.0.10',
   summary: 'ActiveRecord component for the ClinicalFramework; provides CRUD pattern using Autoform.',
   git: 'http://github.com/clinical-meteor/clinical-active-record/',
   documentation: 'README.md'
@@ -22,6 +22,11 @@ Package.onUse(function (api) {
   api.imply('aldeed:collection2@2.3.3');
 
   api.addFiles([
+    'lib/ActiveRecord.js',
+    'lib/Foo.js'
+  ]);
+
+  api.addFiles([
     'components/recordsListPage/recordsListPage.html',
     'components/recordsListPage/recordsListPage.js',
     'components/recordsListPage/recordsListPage.less',
@@ -39,11 +44,6 @@ Package.onUse(function (api) {
     'components/recordUpsertPage/recordUpsertPage.less',
   ], ['client']);
 
-  api.addFiles([
-    'lib/ActiveRecord.js',
-    'lib/Foo.js'
-
-  ], ['client', 'server']);
 
   api.addFiles(['server/publications.js'], 'server');
 
