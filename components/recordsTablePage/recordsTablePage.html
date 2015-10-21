@@ -5,9 +5,9 @@
     <div class="pageBody" style="{{getOpacity}}">
       <input id="recordSearchInput" type="text" class="glass fullwidth form-control" placeholder="search..." />
 
-      <table id="foosTable" class=" table table-striped tablesorter">
+      <table id="recordsTable" class=" table table-striped tablesorter">
         <thead>
-          <tr class="fooHeaderRow">
+          <tr class="recordHeaderRow">
             <th>
               <i class="fa fa-check"></i>
             </th>
@@ -27,8 +27,8 @@
           </tr>
         </thead>
         <tbody>
-          {{#each foosList}}
-            <tr class="fooRow {{isGrayedOut}}">
+          {{#each recordsList}}
+            <tr class="recordRow {{isGrayedOut}}">
               <td class="checkbox">
                 <i class="fa {{checkedIcon}}"></i>
               </td>
@@ -58,6 +58,6 @@
         </tbody>
       </table>
     </div>
-    {{> recordFooter}}
+    {{> recordRecords.ter}}
   </article>
 </template>

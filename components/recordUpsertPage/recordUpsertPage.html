@@ -5,10 +5,10 @@
 
     <div id="recordUpsertCard" class="horizontally-padded card-contents" style="{{getOpacity}}">
       {{#autoForm
-        id="newFooForm"
-        collection="Foo"
+        id="newRecords.Form"
+        collection="Records."
         type="insert"
-        schema=FooSchema
+        schema=Records.Schema
         buttonContent="Save"
         buttonClass="glass-footer-btn"
         doc=this
@@ -18,7 +18,7 @@
           {{> afQuickField name=this.name options=afOptionsFromSchema autocomplete="off"}}
         {{/each}}
 
-      <button id="saveRecordButton" type="submit" class="glass-footer-btn">Save Foo</button>
+      <button id="saveRecordButton" type="submit" class="glass-footer-btn">Save Records.</button>
       {{#if this}}
         <button id="removeRecordButton" data-_id={{doc._id}} data-name={{doc.name}} type="button" class="right removeRecord btn btn-danger">Delete</button>
       {{/if}}
@@ -26,6 +26,6 @@
       {{/autoForm}}
     </div>
 
-    {{> recordFooter }}
+    {{> recordRecords.ter }}
   </div>
 </template>

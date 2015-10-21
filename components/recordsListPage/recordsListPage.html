@@ -6,7 +6,7 @@
       <input id="recordSearchInput" type="text" class="glass fullwidth form-control" placeholder="search..." value="{{getRecordSearchFilter}}" />
       <ul id="recordsList">
         {{#if hasNoContent}}
-          <li id="noResultsMessage" class="addFooItem">
+          <li id="noResultsMessage" class="addRecords.Item">
             <article class="noResultsMessage">
               <span>There are no results!  Click to add one.</span>
             </article>
@@ -14,7 +14,7 @@
           </li>
 
         {{else}}
-          {{#each foosList}}
+          {{#each recordsList}}
             <li class="recordItem">
               <article>
                 <h2 class="titleText">{{institutionId}} - {{participantId}}</h2>
@@ -32,6 +32,6 @@
         {{/if}}
       </ul>
     </div>
-    {{> recordFooter }}
+    {{> recordRecords.ter }}
   </article>
 </template>

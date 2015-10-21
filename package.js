@@ -23,7 +23,7 @@ Package.onUse(function (api) {
 
   api.addFiles([
     'lib/ActiveRecord.js',
-    'lib/Foo.js'
+    'lib/Records.js'
   ]);
 
   api.addFiles([
@@ -48,7 +48,7 @@ Package.onUse(function (api) {
   api.addFiles(['server/publications.js'], 'server');
 
   api.export("ActiveRecord");
-  api.export("Foo");
+  api.export("Records.");
 });
 
 Package.onTest(function (api) {

@@ -1,4 +1,4 @@
-Router.route("/grid/foos", {
+Router.route("/grid/records", {
   template: "recordImageGridPage",
   name: "recordImageGridPage"
 });
@@ -10,9 +10,9 @@ Template.recordImageGridPage.rendered = function () {
 
 Template.recordImageGridPage.helpers({
   lists: function () {
-    return Foo.find({
+    return Records.find({
       title: {
-        $regex: Session.get('fooSearchFilter'),
+        $regex: Session.get('recordSearchFilter'),
         $options: 'i'
       }
     });
@@ -21,12 +21,12 @@ Template.recordImageGridPage.helpers({
 
 Template.recordImageGridPage.events({
   'keyup #recordSearchInput': function () {
-    Session.set('fooSearchFilter', $('#recordSearchInput').val());
+    Session.set('recordSearchFilter', $('#recordSearchInput').val());
   },
   "click .recordImage": function (event, template) {
-    Router.go('/upsert/foo/' + this._id);
+    Router.go('/upsert/record/' + this._id);
   },
   "click .addNewRecord": function (event, template) {
-    Router.go('/insert/foo');
+    Router.go('/insert/record');
   }
 });

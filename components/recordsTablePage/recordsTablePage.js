@@ -1,4 +1,4 @@
-Session.setDefault('fooSearchFilter', '');
+Session.setDefault('recordSearchFilter', '');
 Session.setDefault('tableLimit', 20);
 Session.setDefault('paginationCount', 1);
 Session.setDefault('selectedPagination', 0);
@@ -11,7 +11,7 @@ Session.setDefault('skipCount', 0);
 
 Router.map(function(){
   this.route('recordsTablePage', {
-    path: '/table/foos',
+    path: '/table/records',
     template: 'recordsTablePage'
   });
 });
@@ -23,53 +23,53 @@ Router.map(function(){
 Template.recordsTablePage.events({
   'click .starA': function(event, template){
     event.stopPropagation();
-    Foo.update({_id: this._id}, {$set: {stars: 1}});
+    Records.update({_id: this._id}, {$set: {stars: 1}});
   },
   'click .starB': function(event, template){
     event.stopPropagation();
-    Foo.update({_id: this._id}, {$set: {stars: 2}});
+    Records.update({_id: this._id}, {$set: {stars: 2}});
   },
   'click .starC': function(event, template){
     event.stopPropagation();
-    Foo.update({_id: this._id}, {$set: {stars: 3}});
+    Records.update({_id: this._id}, {$set: {stars: 3}});
   },
   'click .starD': function(event, template){
     event.stopPropagation();
-    Foo.update({_id: this._id}, {$set: {stars: 4}});
+    Records.update({_id: this._id}, {$set: {stars: 4}});
   },
   'click .starE': function(event, template){
     event.stopPropagation();
-    Foo.update({_id: this._id}, {$set: {stars: 5}});
+    Records.update({_id: this._id}, {$set: {stars: 5}});
   },
   'click .checkbox': function(event, template){
     event.stopPropagation();
     if(this.checked){
-      Foo.update({_id: this._id}, {$set: {checked: false}});
+      Records.update({_id: this._id}, {$set: {checked: false}});
     }else{
-      Foo.update({_id: this._id}, {$set: {checked: true}});
+      Records.update({_id: this._id}, {$set: {checked: true}});
     }
   },
   'click .flag': function(event, template){
     event.stopPropagation();
     if(this.flagged){
-      Foo.update({_id: this._id}, {$set: {flagged: false}});
+      Records.update({_id: this._id}, {$set: {flagged: false}});
     }else{
-      Foo.update({_id: this._id}, {$set: {flagged: true}});
+      Records.update({_id: this._id}, {$set: {flagged: true}});
     }
   },
   'click .addUserIcon': function(){
-    Router.go('/insert/foo');
+    Router.go('/insert/record');
   },
   'click .delete': function(){
-    Foo.remove(this._id);
+    Records.remove(this._id);
   },
   'click tr': function(){
-    Router.go('/view/foo/' + this._id);
+    Router.go('/view/record/' + this._id);
   },
   // use keyup to implement dynamic filtering
   // keyup is preferred to keypress because of end-of-line issues
   'keyup #recordSearchInput': function() {
-    Session.set('fooSearchFilter', $('#recordSearchInput').val());
+    Session.set('recordSearchFilter', $('#recordSearchInput').val());
   }
 });
 
@@ -134,7 +134,7 @@ Template.recordsTablePage.helpers({
       return "fa-flag-o";
     }
   },
-  foosList: function() {
+  recordsList: function() {
     // this triggers a refresh of data elsewhere in the table
     // step C:  receive some data and set our reactive data variable with a new value
     Session.set('receivedData', new Date());
@@ -144,9 +144,9 @@ Template.recordsTablePage.helpers({
     // this is a performant local (client-side) search on the data
     // current in our CustomerAccounts cursor, and will reactively
     // update the table
-    return Foo.find({
+    return Records.find({
       title: {
-        $regex: Session.get('fooSearchFilter'),
+        $regex: Session.get('recordSearchFilter'),
         $options: 'i'
     }});
   }
@@ -157,7 +157,7 @@ Template.recordsTablePage.rendered = function(){
   Template.appLayout.layout();
 
   // step A:  initialize the table sorting functionality
-  $(this.find('#foosTable')).tablesorter();
+  $(this.find('#recordsTable')).tablesorter();
 
   // the Tracker API watches Collection and Session objects
   // so what we're doing here is registering a Tracker to watch the
@@ -175,7 +175,7 @@ Template.recordsTablePage.rendered = function(){
     setTimeout(function() {
       // step F:  update the tablesorting library 200ms after receiving data
       // and Blaze has had a change to rerender the table
-      $("#foosTable").trigger("update");
+      $("#recordsTable").trigger("update");
     }, 200);
   });
 

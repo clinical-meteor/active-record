@@ -2,8 +2,8 @@ Session.setDefault('recordReadOnly', true);
 
 
 Router.map(function (){
-  this.route('newFooRoute', {
-    path: '/insert/foo',
+  this.route('newRecords.Route', {
+    path: '/insert/record',
     template: 'recordUpsertPage',
     onAfterAction: function (){
       Session.set('recordReadOnly', false);
@@ -19,21 +19,21 @@ Router.route('/questionnaire/:questionnaireId/new', {
   }
 });
 
-Router.route('/upsert/foo/:id', {
-  name: 'upsertFooRoute',
+Router.route('/upsert/record/:id', {
+  name: 'upsertRecords.Route',
   template: 'recordUpsertPage',
   data: function (){
-    return Foo.findOne(this.params.id);
+    return Records.findOne(this.params.id);
   },
   onAfterAction: function (){
     Session.set('recordReadOnly', false);
   }
 });
-Router.route('/view/foo/:id', {
-  name: 'viewFooRoute',
+Router.route('/view/record/:id', {
+  name: 'viewRecords.Route',
   template: 'recordUpsertPage',
   data: function (){
-    return Foo.findOne(this.params.id);
+    return Records.findOne(this.params.id);
   },
   onAfterAction: function (){
     Session.set('recordReadOnly', true);
@@ -50,7 +50,7 @@ Template.recordUpsertPage.rendered = function (){
 
 
 Template.recordUpsertPage.helpers({
-  isNewFoo: function (){
+  isNewRecords.: function (){
     if (this._id){
       return false;
     } else {
@@ -80,15 +80,15 @@ Template.recordUpsertPage.helpers({
 
 Template.recordUpsertPage.events({
   'click #removeRecordButton': function (){
-    Foo.remove(this._id, function (error, result){
+    Records.remove(this._id, function (error, result){
       if (result){
-        Router.go('/list/foos');
+        Router.go('/list/records');
       }
     });
   },
   "click #saveRecordButton": function (event, template){
     event.preventDefault();
-    Template.recordUpsertPage.saveFoo(false, this);
+    Template.recordUpsertPage.saveRecords.(false, this);
     Session.set('recordReadOnly', true);
   },
   "click .barcode": function (){
@@ -98,11 +98,11 @@ Template.recordUpsertPage.events({
     } else {
       Session.set('recordReadOnly', true);
       console.log('Locking the record...');
-      Template.recordUpsertPage.saveFoo(false, this);
+      Template.recordUpsertPage.saveRecords.(false, this);
     }
   },
-  "click #lockFooButton": function (){
-    console.log("click #lockFooButton");
+  "click #lockRecords.Button": function (){
+    console.log("click #lockRecords.Button");
 
     if (Session.equals('recordReadOnly', true)){
       Session.set('recordReadOnly', false);
@@ -111,27 +111,27 @@ Template.recordUpsertPage.events({
     }
   },
   "click .listButton": function (event, template){
-    Router.go('/list/foos');
+    Router.go('/list/records');
   },
   "click .imageGridButton": function (event, template){
-    Router.go('/grid/foos');
+    Router.go('/grid/records');
   },
   "click .tableButton": function (event, template){
-    Router.go('/table/foos');
+    Router.go('/table/records');
   },
-  'click #previewFooButton':function (){
+  'click #previewRecords.Button':function (){
     Router.go('/customer/' + this._id);
   }
   // 'submit #saveRecordButton': function () {
-  //   console.log('creating new foo...');
-  //   Template.recordUpsertPage.saveFoo(false, this);
+  //   console.log('creating new record...');
+  //   Template.recordUpsertPage.saveRecords.(false, this);
   // }
 });
 
 
-Template.recordUpsertPage.saveFoo = function (record, questionnaire){
+Template.recordUpsertPage.saveRecords. = function (record, questionnaire){
 
-  console.log("Template.recordUpsertPage.saveFoo", questionnaire);
+  console.log("Template.recordUpsertPage.saveRecords.", questionnaire);
   // TODO:  add validation functions
 
   // var newRecord = {
@@ -180,15 +180,15 @@ Template.recordUpsertPage.saveFoo = function (record, questionnaire){
 
 
   if (record._id){
-    Foo.update({_id: record._id}, {$set: newRecord }, function (error, result){
+    Records.update({_id: record._id}, {$set: newRecord }, function (error, result){
       if (error) console.log(error);
-      Router.go('/view/foo/' + record._id);
+      Router.go('/view/record/' + record._id);
     });
   } else {
-    Foo.insert(newRecord, function (error, result){
+    Records.insert(newRecord, function (error, result){
       if (error) console.log(error);
-      Router.go('/list/foos');
-      //Router.go('/view/foo/' + result);
+      Router.go('/list/records');
+      //Router.go('/view/record/' + result);
     });
   }
 };

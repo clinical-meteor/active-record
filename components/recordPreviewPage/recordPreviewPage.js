@@ -1,38 +1,39 @@
-
-Router.map(function(){
+Router.map(function () {
   this.route('recordPreviewPage', {
-    path: '/foo/:id',
+    path: '/record/:id',
     template: 'recordPreviewPage',
     data: function () {
-      return Foo.findOne({_id: this.params.id});
+      return Records.findOne({
+        _id: this.params.id
+      });
     },
-    onAfterAction: function(){
+    onAfterAction: function () {
       Template.appLayout.layout();
     }
   });
 });
 
 
-Template.recordPreviewPage.rendered = function(){
+Template.recordPreviewPage.rendered = function () {
   Template.appLayout.layout();
 };
 
 
 
 Template.recordPreviewPage.events({
-  "click .listButton": function(event, template){
-    Router.go('/list/foos');
+  "click .listButton": function (event, template) {
+    Router.go('/list/records');
   },
-  "click .imageGridButton": function(event, template){
-    Router.go('/grid/foos');
+  "click .imageGridButton": function (event, template) {
+    Router.go('/grid/records');
   },
-  "click .tableButton": function(event, template){
-    Router.go('/table/foos');
+  "click .tableButton": function (event, template) {
+    Router.go('/table/records');
   },
-  "click .indexButton": function(event, template){
-    Router.go('/list/foos');
+  "click .indexButton": function (event, template) {
+    Router.go('/list/records');
   },
-  "click .recordId": function(){
-    Router.go('/upsert/foo/' + this._id);
+  "click .recordId": function () {
+    Router.go('/upsert/record/' + this._id);
   }
 });
