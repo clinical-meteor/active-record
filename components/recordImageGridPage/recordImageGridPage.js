@@ -9,17 +9,11 @@ Template.recordImageGridPage.rendered = function () {
 };
 
 Template.recordImageGridPage.helpers({
-  lists: function () {
-    return Records.find({
-      title: {
-        $regex: Session.get('recordSearchFilter'),
-        $options: 'i'
-      }
-    });
-  }
+
 });
 
 Template.recordImageGridPage.events({
+
   'keyup #recordSearchInput': function () {
     Session.set('recordSearchFilter', $('#recordSearchInput').val());
   },

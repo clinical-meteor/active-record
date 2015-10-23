@@ -2,9 +2,13 @@ Package.describe({
   name: 'clinical:active-record',
   version: '1.0.12',
   summary: 'ActiveRecord component for the ClinicalFramework; provides CRUD pattern using Autoform.',
-  git: 'http://github.com/clinical-meteor/clinical-active-record/',
+  git: 'http://github.com/UCSC-MedBook/medbook-active-record/',
   documentation: 'README.md'
 });
+
+// Npm.depends({
+//   "oauth2orize":"1.0.1"
+// });
 
 Package.onUse(function (api) {
   api.versionsFrom('1.1.0.2');
@@ -13,6 +17,8 @@ Package.onUse(function (api) {
   api.use('iron:router@1.0.7');
   api.use('grove:less@0.1.1');
   api.use('photonic:glass-ui@0.2.4');
+
+  api.use('awsp:handsontable@0.11.0');
 
   api.use('photonic:active-record-core@0.0.2');
   api.use('photonic:active-record-header@0.0.4');
@@ -27,6 +33,8 @@ Package.onUse(function (api) {
   ]);
 
   api.addFiles([
+    'components/helpers.js',
+
     'components/recordsListPage/recordsListPage.html',
     'components/recordsListPage/recordsListPage.js',
     'components/recordsListPage/recordsListPage.less',
@@ -39,6 +47,10 @@ Package.onUse(function (api) {
     'components/recordsTablePage/recordsTablePage.js',
     'components/recordsTablePage/recordsTablePage.less',
 
+    'components/recordsSpreadsheetPage/recordsSpreadsheetPage.html',
+    'components/recordsSpreadsheetPage/recordsSpreadsheetPage.js',
+    'components/recordsSpreadsheetPage/recordsSpreadsheetPage.less',
+
     'components/recordUpsertPage/recordUpsertPage.html',
     'components/recordUpsertPage/recordUpsertPage.js',
     'components/recordUpsertPage/recordUpsertPage.less',
@@ -48,7 +60,7 @@ Package.onUse(function (api) {
   api.addFiles(['server/publications.js'], 'server');
 
   api.export("ActiveRecord");
-  api.export("Records.");
+  api.export("Records");
 });
 
 Package.onTest(function (api) {

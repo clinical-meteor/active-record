@@ -6,7 +6,7 @@ exports.command = function (dataRecord) {
     .verify.elementPresent("#recordsList")
     .verify.elementPresent("#recordsList .recordItem:nth-child(1)")
     .verify.elementPresent("#recordsList .recordItem:nth-child(1) article")
-    .verify.elementPresent("#recordsListPage .recordRecords.ter");
+    .verify.elementPresent("#recordsListPage .recordFooter");
 
   if (dataRecord){
     this
@@ -31,12 +31,12 @@ exports.command = function (dataRecord) {
 //     .verify.elementPresent("#recordsList")
 //     .verify.elementPresent("#recordsList .recordItem:nth-child(1)")
 //     .verify.elementPresent("#recordsList .recordItem:nth-child(1) article")
-//     .verify.elementPresent("#recordsListPage .recordRecords.ter");
+//     .verify.elementPresent("#recordsListPage .recordFooter");
 //
 //   if (isNew) {
 //     this
 //       .verify.elementPresent("#recordsList #noResultsMessage")
-//       .verify.elementPresent("#recordsList .addRecords.Item")
+//       .verify.elementPresent("#recordsList .addRecordItem")
 //       .verify.elementNotPresent("#recordsList .recordItem:nth-child(2)")
 //       .verify.elementNotPresent("#recordsList .recordItem:nth-child(2) article");
 //   }

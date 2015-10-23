@@ -1,12 +1,12 @@
 
 <template name="recordsListPage">
   <article id="recordsListPage" class="page fizzle">
-    {{> recordHeader type="record"}}
+    {{> recordHeader imageGrid=false url="records"}}
     <div class="pageBody" style="{{getOpacity}}">
       <input id="recordSearchInput" type="text" class="glass fullwidth form-control" placeholder="search..." value="{{getRecordSearchFilter}}" />
       <ul id="recordsList">
         {{#if hasNoContent}}
-          <li id="noResultsMessage" class="addRecords.Item">
+          <li id="noResultsMessage" class="addRecordItem">
             <article class="noResultsMessage">
               <span>There are no results!  Click to add one.</span>
             </article>
@@ -18,7 +18,7 @@
             <li class="recordItem">
               <article>
                 <h2 class="titleText">{{institutionId}} - {{participantId}}</h2>
-                <span class="pull-right barcode gray barcodeText">{{_id}}</span><br>
+                <!-- <span class="pull-right barcode gray barcodeText">{{_id}}</span><br> -->
                 <span class="leftSubtitle">{{physicianName}}</span>
                 <span class="leftSubSubtitle">{{patientGender}} / {{patientAge}}</span>
                 <span class="leftText">{{description}}</span>
@@ -32,6 +32,6 @@
         {{/if}}
       </ul>
     </div>
-    {{> recordRecords.ter }}
+    {{> recordFooter }}
   </article>
 </template>

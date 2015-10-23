@@ -1,14 +1,14 @@
 <template name="recordUpsertPage">
   <div id="recordUpsertPage" class="page">
 
-    {{> recordHeader type="record"}}
+    {{> recordHeader type="record" imageGrid=false url="records"}}
 
     <div id="recordUpsertCard" class="horizontally-padded card-contents" style="{{getOpacity}}">
       {{#autoForm
-        id="newRecords.Form"
-        collection="Records."
+        id="newRecordForm"
+        collection="Records"
         type="insert"
-        schema=Records.Schema
+        schema=RecordSchema
         buttonContent="Save"
         buttonClass="glass-footer-btn"
         doc=this
@@ -26,6 +26,6 @@
       {{/autoForm}}
     </div>
 
-    {{> recordRecords.ter }}
+    {{> recordFooter }}
   </div>
 </template>

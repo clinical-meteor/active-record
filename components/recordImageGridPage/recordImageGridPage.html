@@ -1,11 +1,11 @@
 <template name="recordImageGridPage">
   <article id="recordImageGridPage" class="page">
-    {{> recordHeader type="record"}}
+    {{> recordHeader imageGrid=false url="records"}}
     <div class="pageBody" style="{{getOpacity}}">
       <input id="recordSearchInput" type="text" class="glass fullwidth form-control" placeholder="search..." />
 
       <ul id="recordImageGrid">
-        {{#each lists}}
+        {{#each recordsList}}
           <li>
             <img class="recordImage" src="{{imageUrl}}" />
           </li>
@@ -15,6 +15,6 @@
         </li>
       </ul>
     </div>
-    {{> recordRecords.ter }}
+    {{> recordFooter }}
   </article>
 </template>

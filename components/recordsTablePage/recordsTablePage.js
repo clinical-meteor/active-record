@@ -1,4 +1,3 @@
-Session.setDefault('recordSearchFilter', '');
 Session.setDefault('tableLimit', 20);
 Session.setDefault('paginationCount', 1);
 Session.setDefault('selectedPagination', 0);
@@ -9,7 +8,7 @@ Session.setDefault('skipCount', 0);
 //------------------------------------------------------------------------------
 // ROUTING
 
-Router.map(function(){
+Router.map(function (){
   this.route('recordsTablePage', {
     path: '/table/records',
     template: 'recordsTablePage'
@@ -21,54 +20,55 @@ Router.map(function(){
 // TEMPLATE INPUTS
 
 Template.recordsTablePage.events({
-  'click .starA': function(event, template){
+
+  'click .starA': function (event, template){
     event.stopPropagation();
     Records.update({_id: this._id}, {$set: {stars: 1}});
   },
-  'click .starB': function(event, template){
+  'click .starB': function (event, template){
     event.stopPropagation();
     Records.update({_id: this._id}, {$set: {stars: 2}});
   },
-  'click .starC': function(event, template){
+  'click .starC': function (event, template){
     event.stopPropagation();
     Records.update({_id: this._id}, {$set: {stars: 3}});
   },
-  'click .starD': function(event, template){
+  'click .starD': function (event, template){
     event.stopPropagation();
     Records.update({_id: this._id}, {$set: {stars: 4}});
   },
-  'click .starE': function(event, template){
+  'click .starE': function (event, template){
     event.stopPropagation();
     Records.update({_id: this._id}, {$set: {stars: 5}});
   },
-  'click .checkbox': function(event, template){
+  'click .checkbox': function (event, template){
     event.stopPropagation();
-    if(this.checked){
+    if (this.checked){
       Records.update({_id: this._id}, {$set: {checked: false}});
-    }else{
+    } else {
       Records.update({_id: this._id}, {$set: {checked: true}});
     }
   },
-  'click .flag': function(event, template){
+  'click .flag': function (event, template){
     event.stopPropagation();
-    if(this.flagged){
+    if (this.flagged){
       Records.update({_id: this._id}, {$set: {flagged: false}});
-    }else{
+    } else {
       Records.update({_id: this._id}, {$set: {flagged: true}});
     }
   },
-  'click .addUserIcon': function(){
+  'click .addUserIcon': function (){
     Router.go('/insert/record');
   },
-  'click .delete': function(){
+  'click .delete': function (){
     Records.remove(this._id);
   },
-  'click tr': function(){
+  'click tr': function (){
     Router.go('/view/record/' + this._id);
   },
   // use keyup to implement dynamic filtering
   // keyup is preferred to keypress because of end-of-line issues
-  'keyup #recordSearchInput': function() {
+  'keyup #recordSearchInput': function () {
     Session.set('recordSearchFilter', $('#recordSearchInput').val());
   }
 });
@@ -78,82 +78,66 @@ Template.recordsTablePage.events({
 // TEMPLATE OUTPUTS
 
 Template.recordsTablePage.helpers({
-  isGrayedOut: function(){
-    if(this.checked){
+  isGrayedOut: function (){
+    if (this.checked){
       return "gray";
-    }else{
+    } else {
       return "";
     }
   },
-  starA: function(){
-    if(this.stars >= 1){
+  starA: function (){
+    if (this.stars >= 1){
       return "fa-star";
-    }else{
-      return "fa-star-o"
+    } else {
+      return "fa-star-o";
     }
   },
-  starB: function(){
-    if(this.stars >= 2){
+  starB: function (){
+    if (this.stars >= 2){
       return "fa-star";
-    }else{
-      return "fa-star-o"
+    } else {
+      return "fa-star-o";
     }
   },
-  starC: function(){
-    if(this.stars >= 3){
+  starC: function (){
+    if (this.stars >= 3){
       return "fa-star";
-    }else{
-      return "fa-star-o"
+    } else {
+      return "fa-star-o";
     }
   },
-  starD: function(){
-    if(this.stars >= 4){
+  starD: function (){
+    if (this.stars >= 4){
       return "fa-star";
-    }else{
-      return "fa-star-o"
+    } else {
+      return "fa-star-o";
     }
   },
-  starE: function(){
-    if(this.stars == 5){
+  starE: function (){
+    if (this.stars === 5){
       return "fa-star";
-    }else{
-      return "fa-star-o"
+    } else {
+      return "fa-star-o";
     }
   },
-  checkedIcon: function(){
-    if(this.checked){
+  checkedIcon: function (){
+    if (this.checked){
       return "fa-check";
-    }else{
+    } else {
       return "fa-square-o";
     }
   },
-  flaggedIcon: function(){
-    if(this.flagged){
+  flaggedIcon: function (){
+    if (this.flagged){
       return "fa-flag";
-    }else{
+    } else {
       return "fa-flag-o";
     }
-  },
-  recordsList: function() {
-    // this triggers a refresh of data elsewhere in the table
-    // step C:  receive some data and set our reactive data variable with a new value
-    Session.set('receivedData', new Date());
-
-    Template.appLayout.delayedLayout(100);
-
-    // this is a performant local (client-side) search on the data
-    // current in our CustomerAccounts cursor, and will reactively
-    // update the table
-    return Records.find({
-      title: {
-        $regex: Session.get('recordSearchFilter'),
-        $options: 'i'
-    }});
   }
 });
 
 
-Template.recordsTablePage.rendered = function(){
+Template.recordsTablePage.rendered = function (){
   Template.appLayout.layout();
 
   // step A:  initialize the table sorting functionality
@@ -166,13 +150,13 @@ Template.recordsTablePage.rendered = function(){
 
   // step B:  register a tracker to add the tablesorting functionality back
   // after we update data
-  Tracker.autorun(function() {
+  Tracker.autorun(function () {
 
     // step D: register that the recevedData variable has been changed
     // and rerun the Tracker clause
     // step E: actually log the new value in receivedData
-    console.log(Session.get('receivedData'))
-    setTimeout(function() {
+    console.log(Session.get('receivedData'));
+    setTimeout(function () {
       // step F:  update the tablesorting library 200ms after receiving data
       // and Blaze has had a change to rerender the table
       $("#recordsTable").trigger("update");

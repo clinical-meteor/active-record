@@ -15,7 +15,7 @@ meteor add clinical:active-record
 1.  Define your schema...
 
 ```js
-CkccSchema = new SimpleSchema({
+SampleSchema = new SimpleSchema({
   "name": {
     type: String,
     optional: true,
@@ -37,7 +37,7 @@ CkccSchema = new SimpleSchema({
     }
   }
 });
-Records.attachSchema(CkccSchema);
+Records.attachSchema(SampleSchema);
 ```
 
 2.  Set up your publications and subscriptions....
@@ -93,11 +93,17 @@ Router.go('/record/:id');
 ===============================
 #### Cloning/Forking  
 
+While ActiveRecord works fine if there's a single schema that you want to create some basic CRUDL user interface for; it's quite likely that you'll want to have multiple schemas, or simply want to modify the default templates somehow.  
 
+The recommended approach for using ActiveRecord is to clone it into your application's ``/packages`` directory, and to then refactor all the references of ``Record`` to the name of whatever you're modeling.  You'll want to be sure to rename both the capitalized and non-capitalized versions.  Back up your files before doing this refactor!    
 
-````bash
-
-````
+```bash
+cd myapp/packages
+git clone http://github.com/clinical-meteor/clinical-active-record
+cd clinical-active-record
+find . -tyope f -print0 | xargs -0 sed -i 's/Record/Foo/g'
+find . -tyope f -print0 | xargs -0 sed -i 's/record/foo/g'
+```
 
 
 ===============================

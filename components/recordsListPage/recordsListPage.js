@@ -1,4 +1,3 @@
-Session.setDefault('recordSearchFilter', '');
 Session.setDefault('tableLimit', 20);
 Session.setDefault('paginationCount', 1);
 Session.setDefault('selectedPagination', 0);
@@ -17,7 +16,7 @@ Router.map(function () {
       'navbarHeader': {
         to: 'header'
       },
-      'navbarRecords.ter': {
+      'navbarFooter': {
         to: 'recordter'
       },
       'mainSidebar': {
@@ -42,7 +41,7 @@ Template.recordsListPage.events({
   'change #recordSearchInput': function () {
     Session.set('recordSearchFilter', $('#recordSearchInput').val());
   },
-  'click .addRecords.Item': function () {
+  'click .addRecordItem': function () {
     Router.go('/insert/record');
   },
   'click .recordItem': function (event, template) {
@@ -87,61 +86,5 @@ Template.recordsListPage.helpers({
     } else {
       return false;
     }
-  },
-  recordsList: function () {
-    // this triggers a refresh of data elsewhere in the table
-    // step C:  receive some data and set our reactive data variable with a new value
-    Session.set('receivedData', new Date());
-
-    Template.appLayout.delayedLayout(20);
-
-    // this is a performant local (client-side) search on the data
-    // current in our CustomerAccounts cursor, and will reactively
-    // update the table
-
-    return Records.find({
-      $or: [
-        {
-          institutionId: {
-            $regex: Session.get('recordSearchFilter'),
-            $options: 'i'
-          }
-        },
-        {
-          participantId: {
-            $regex: Session.get('recordSearchFilter'),
-            $options: 'i'
-          }
-        },
-        {
-          _id: {
-            $regex: Session.get('recordSearchFilter'),
-            $options: 'i'
-          }
-        },
-        {
-          physicianName: {
-            $regex: Session.get('recordSearchFilter'),
-            $options: 'i'
-          }
-        },
-        {
-          questionnaireName: {
-            $regex: Session.get('recordSearchFilter'),
-            $options: 'i'
-          }
-        },
-        {
-          collaborationName: {
-            $regex: Session.get('recordSearchFilter'),
-            $options: 'i'
-          }
-        }
-    ]
-    }, {
-      sort: {
-        createdAt: -1
-      }
-    });
   }
 });

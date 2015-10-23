@@ -46,7 +46,7 @@ exports.command = function (record, title, url, imageUrl, description) {
   }
 
   this
-    .verify.elementPresent("#recordUpsertPage .pageRecords.ter")
+    .verify.elementPresent("#recordUpsertPage .pageFooter")
     .verify.elementPresent("#saveRecordButton");
 
   return this;

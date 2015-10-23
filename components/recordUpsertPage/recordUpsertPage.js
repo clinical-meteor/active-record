@@ -11,13 +11,7 @@ Router.map(function (){
   });
 
 });
-Router.route('/questionnaire/:questionnaireId/new', {
-  name: 'recordUpsertForTemplate',
-  template: 'recordUpsertPage',
-  data: function (){
-    return Questionnaires.findOne({_id: this.params.questionnaireId});
-  }
-});
+
 
 Router.route('/upsert/record/:id', {
   name: 'upsertRecords.Route',
@@ -50,7 +44,7 @@ Template.recordUpsertPage.rendered = function (){
 
 
 Template.recordUpsertPage.helpers({
-  isNewRecords.: function (){
+  isNewRecord: function (){
     if (this._id){
       return false;
     } else {
@@ -88,7 +82,7 @@ Template.recordUpsertPage.events({
   },
   "click #saveRecordButton": function (event, template){
     event.preventDefault();
-    Template.recordUpsertPage.saveRecords.(false, this);
+    Template.recordUpsertPage.saveRecord(false, this);
     Session.set('recordReadOnly', true);
   },
   "click .barcode": function (){
@@ -98,7 +92,7 @@ Template.recordUpsertPage.events({
     } else {
       Session.set('recordReadOnly', true);
       console.log('Locking the record...');
-      Template.recordUpsertPage.saveRecords.(false, this);
+      Template.recordUpsertPage.saveRecord(false, this);
     }
   },
   "click #lockRecords.Button": function (){
@@ -110,54 +104,13 @@ Template.recordUpsertPage.events({
       Session.set('recordReadOnly', true);
     }
   },
-  "click .listButton": function (event, template){
-    Router.go('/list/records');
-  },
-  "click .imageGridButton": function (event, template){
-    Router.go('/grid/records');
-  },
-  "click .tableButton": function (event, template){
-    Router.go('/table/records');
-  },
-  'click #previewRecords.Button':function (){
-    Router.go('/customer/' + this._id);
-  }
-  // 'submit #saveRecordButton': function () {
-  //   console.log('creating new record...');
-  //   Template.recordUpsertPage.saveRecords.(false, this);
-  // }
 });
 
 
-Template.recordUpsertPage.saveRecords. = function (record, questionnaire){
+Template.recordUpsertPage.saveRecord = function (record, questionnaire){
 
   console.log("Template.recordUpsertPage.saveRecords.", questionnaire);
   // TODO:  add validation functions
-
-  // var newRecord = {
-  //   institutionName: $('input[name="institutionName"]').val(),
-  //   institutionId: $('input[name="institutionId"]').val(),
-  //   physicianName: $('input[name="physicianName"]').val(),
-  //   studyName: $('input[name="studyName"]').val(),
-  //   studyId: $('input[name="studyId"]').val(),
-  //   patientAge: $('input[name="patientAge"]').val(),
-  //   patientGender: $('input[name="patientGender"]').val(),
-  //   diagnosisDescription: $('input[name="diagnosisDescription"]').val(),
-  //   diagnosisCode: $('input[name="diagnosisCode"]').val(),
-  //   diseaseSubtype: $('input[name="diseaseSubtype"]').val(),
-  //   priorTreatmentHistory: $('input[name="priorTreatmentHistory"]').val(),
-  //   complicatingConditions: $('input[name="complicatingConditions"]').val(),
-  //   currentStatus: $('input[name="currentStatus"]').val(),
-  //   lastFollowUpDate: $('input[name="lastFollowUpDate"]').val(),
-  //   familyHistory: $('input[name="familyHistory"]').val(),
-  //   molecularTesting: $('input[name="molecularTesting"]').val(),
-  //   actionableFindings: $('input[name="actionableFindings"]').val(),
-  //   genomicAnalysis: $('input[name="genomicAnalysis"]').val(),
-  //   biopsySource: $('input[name="biopsySource"]').val(),
-  //   tumorCellFraction: $('input[name="tumorCellFraction"]').val(),
-  //   otherStudies: $('input[name="otherStudies"]').val(),
-  //   createdAt: new Date()
-  // };
 
   var newRecord = {};
   var inputElements = $('#recordUpsertPage input');
