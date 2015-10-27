@@ -89,7 +89,7 @@ Template.recordsSpreadsheetPage.rendered = function (){
   if (Records.getFilteredData().count() > 0) {
     // step A:  initialize the table sorting functionality
     $(this.find('#recordsSpreadsheet')).handsontable({
-      formulas: true, // Add this line to enable formulas support
+      formulas: false, // Add this line to enable formulas support
       data: Records.getFilteredData().fetch(),
       minSpareRows: 1,
       colHeaders: true,
