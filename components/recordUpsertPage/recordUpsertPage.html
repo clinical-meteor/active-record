@@ -1,21 +1,21 @@
 <template name="recordUpsertPage">
   <div id="recordUpsertPage" class="page">
 
-    {{> recordHeader type="record" imageGrid=false url="records"}}
+    {{> recordHeader type="record" imageGrid=false url="records" title=getFormName }}
 
     <div id="recordUpsertCard" class="horizontally-padded card-contents" style="{{getOpacity}}">
       {{#autoForm
         id="newRecordForm"
         collection="Records"
         type="insert"
-        schema=RecordSchema
+        schema=getCurrentSchema
         buttonContent="Save"
         buttonClass="glass-footer-btn"
         doc=this
       }}
 
         {{#each afFieldNames}}
-          {{> afQuickField name=this.name options=afOptionsFromSchema autocomplete="off"}}
+          {{> afQuickField name=this.name autocomplete="off"}}
         {{/each}}
 
       <button id="saveRecordButton" type="submit" class="glass-footer-btn">Save Records.</button>

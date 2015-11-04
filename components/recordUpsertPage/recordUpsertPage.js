@@ -44,6 +44,32 @@ Template.recordUpsertPage.rendered = function (){
 
 
 Template.recordUpsertPage.helpers({
+  getFormName: function () {
+    return this.CRF;
+  },
+  getCurrentSchema: function (){
+    console.log('Template.recordUpsertPage.getCurrentSchema');
+
+    if (this) {
+      console.log('currentRecord', this);
+
+      var questionnaireMetadata = Metadata.findOne({_id: this.CRF});
+      console.log('currentDehydratedSchema', questionnaireMetadata);
+
+      if (questionnaireMetadata) {
+        if (questionnaireMetadata) {
+          console.log('SchemaHydrator.hydrate(questionnaireMetadata.schema)', SchemaHydrator.hydrate(questionnaireMetadata));
+          return SchemaHydrator.hydrate(questionnaireMetadata);
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  },
   isNewRecord: function (){
     if (this._id){
       return false;

@@ -66,15 +66,6 @@ Template.recordsListPage.events({
 // TEMPLATE OUTPUTS
 
 
-var OFFSCREEN_CLASS = 'off-screen';
-var EVENTS = 'webkitTransitionEnd oTransitionEnd transitionEnd msTransitionEnd transitionend';
-
-Template.recordsListPage.rendered = function () {
-  console.log("trying to update layout...");
-
-  Template.appLayout.delayedLayout(20);
-};
-
 
 Template.recordsListPage.helpers({
   getRecordSearchFilter: function () {

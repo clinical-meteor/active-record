@@ -10,7 +10,7 @@ Session.setDefault('skipCount', 0);
 
 Router.map(function (){
   this.route('recordsTablePage', {
-    path: '/table/records',
+    path:  '/table/records',
     template: 'recordsTablePage'
   });
 });

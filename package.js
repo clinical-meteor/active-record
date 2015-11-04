@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:active-record',
-  version: '1.0.13',
+  version: '1.0.14',
   summary: 'ActiveRecord component for the ClinicalFramework; provides CRUD pattern using Autoform.',
   git: 'http://github.com/UCSC-MedBook/medbook-active-record/',
   documentation: 'README.md'
@@ -14,18 +14,19 @@ Package.onUse(function (api) {
   api.versionsFrom('1.1.0.2');
 
   api.use('meteor-platform');
-  api.use('iron:router@1.0.7');
   api.use('grove:less@0.1.1');
   api.use('photonic:glass-ui@0.2.4');
 
   api.use('awsp:handsontable@0.11.0');
 
   api.use('photonic:active-record-core@0.0.2');
-  api.use('photonic:active-record-header@0.0.4');
+  api.use('photonic:active-record-header@0.0.5');
   api.use('photonic:active-record-footer@0.0.4');
 
   api.imply('aldeed:simple-schema@1.3.3');
   api.imply('aldeed:collection2@2.3.3');
+
+  api.use('clinical:router@2.0.13');
 
   api.addFiles([
     'lib/ActiveRecord.js',

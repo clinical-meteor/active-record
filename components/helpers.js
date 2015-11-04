@@ -1,5 +1,7 @@
 Session.setDefault('recordSearchFilter', '');
 
+
+
 Template.registerHelper("recordsList", function (argument){
   return Records.getFilteredData();
   // return Records.find({
