@@ -10,19 +10,20 @@ exports.command = function (dataRecord) {
 
   if (dataRecord){
     this
+      .verify.elementPresent("#recordSearchInput")
       .clearValue("#recordSearchInput")
       .setValue("#recordSearchInput", dataRecord.collaborationSearch).pause(5000)
       .verify.elementPresent("#recordsList .recordItem:nth-child(1)")
       .verify.elementPresent("#recordsList .recordItem:nth-child(1) article")
-      .verify.elementPresent("#recordsList .recordItem:nth-child(1) article .rightSubtitle")
-      .verify.containsText("#recordsList .recordItem:nth-child(1) article .rightSubtitle", dataRecord.questionnaireName);
+      .verify.elementPresent("#recordsList .recordItem:nth-child(1) article .rightSubSubtitle")
+      .verify.containsText("#recordsList .recordItem:nth-child(1) article .rightSubSubtitle", dataRecord.questionnaireName);
   };
 
   return this;
 };
 
 
-//
+
 // exports.command = function (title, barcode, description, isNew) {
 //   this
 //     .verify.elementPresent("#recordsListPage")

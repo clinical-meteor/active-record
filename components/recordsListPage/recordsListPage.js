@@ -41,6 +41,9 @@ Template.recordsListPage.events({
   'change #recordSearchInput': function () {
     Session.set('recordSearchFilter', $('#recordSearchInput').val());
   },
+  'keyup #recordSearchInput': function () {
+    Session.set('recordSearchFilter', $('#recordSearchInput').val());
+  },
   'click .addRecordItem': function () {
     Router.go('/insert/record');
   },
@@ -68,6 +71,15 @@ Template.recordsListPage.events({
 
 
 Template.recordsListPage.helpers({
+  getQuestionnaireName: function () {
+    return this.questionnaireName;
+    // var questionnaire = Metadata.findOne({_id: this.questionnaireId});
+    // if (questionnaire) {
+    //   return questionnaire.commonName;
+    // } else {
+    //   return "---";
+    // }
+  },
   getRecordSearchFilter: function () {
     return Session.get('recordSearchFilter');
   },

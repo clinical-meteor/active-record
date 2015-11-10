@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:active-record',
-  version: '1.0.14',
+  version: '1.0.15',
   summary: 'ActiveRecord component for the ClinicalFramework; provides CRUD pattern using Autoform.',
   git: 'http://github.com/UCSC-MedBook/medbook-active-record/',
   documentation: 'README.md'
@@ -51,6 +51,10 @@ Package.onUse(function (api) {
     'components/recordsSpreadsheetPage/recordsSpreadsheetPage.html',
     'components/recordsSpreadsheetPage/recordsSpreadsheetPage.js',
     'components/recordsSpreadsheetPage/recordsSpreadsheetPage.less',
+
+    'components/recordActionButtons/recordActionButtons.html',
+    'components/recordActionButtons/recordActionButtons.js',
+    'components/recordActionButtons/recordActionButtons.less',
 
     'components/recordUpsertPage/recordUpsertPage.html',
     'components/recordUpsertPage/recordUpsertPage.js',

@@ -1,36 +1,37 @@
 Session.setDefault('recordReadOnly', true);
 
 
-Router.map(function (){
-  this.route('newRecords.Route', {
-    path: '/insert/record',
-    template: 'recordUpsertPage',
-    onAfterAction: function (){
-      Session.set('recordReadOnly', false);
-    }
-  });
 
-});
-
-
-Router.route('/upsert/record/:id', {
-  name: 'upsertRecords.Route',
+Router.route('/insert/record', {
+  name: 'newRecordsRoute',
   template: 'recordUpsertPage',
   data: function (){
     return Records.findOne(this.params.id);
-  },
-  onAfterAction: function (){
-    Session.set('recordReadOnly', false);
+  }
+});
+Router.route('/upsert/record/:id', {
+  name: 'upsertRecordsRoute',
+  template: 'recordUpsertPage',
+  data: function (){
+    return Records.findOne(this.params.id);
   }
 });
 Router.route('/view/record/:id', {
-  name: 'viewRecords.Route',
+  name: 'viewRecordsRoute',
   template: 'recordUpsertPage',
   data: function (){
     return Records.findOne(this.params.id);
   },
-  onAfterAction: function (){
-    Session.set('recordReadOnly', true);
+  yieldTemplates: {
+    'navbarHeader': {
+      to: 'header'
+    },
+    'navbarFooter': {
+      to: 'footer'
+    },
+    'metadataActionButtons': {
+      to: 'footerActionElements'
+    }
   }
 });
 
@@ -44,16 +45,13 @@ Template.recordUpsertPage.rendered = function (){
 
 
 Template.recordUpsertPage.helpers({
-  getFormName: function () {
-    return this.CRF;
-  },
   getCurrentSchema: function (){
     console.log('Template.recordUpsertPage.getCurrentSchema');
 
-    if (this) {
-      console.log('currentRecord', this);
+    if (this && this.questionnaireId) {
+      console.log('this.questionnaireId', this.questionnaireId);
 
-      var questionnaireMetadata = Metadata.findOne({_id: this.CRF});
+      var questionnaireMetadata = Metadata.findOne({_id: this.questionnaireId});
       console.log('currentDehydratedSchema', questionnaireMetadata);
 
       if (questionnaireMetadata) {
@@ -70,6 +68,32 @@ Template.recordUpsertPage.helpers({
       return false;
     }
   },
+  getFormName: function () {
+    return this.CRF;
+  },
+  // getCurrentSchema: function (){
+  //   console.log('Template.recordUpsertPage.getCurrentSchema');
+  //
+  //   if (this) {
+  //     console.log('currentRecord', this);
+  //
+  //     var questionnaireMetadata = Metadata.findOne({_id: this.CRF});
+  //     console.log('currentDehydratedSchema', questionnaireMetadata);
+  //
+  //     if (questionnaireMetadata) {
+  //       if (questionnaireMetadata) {
+  //         console.log('SchemaHydrator.hydrate(questionnaireMetadata.schema)', SchemaHydrator.hydrate(questionnaireMetadata));
+  //         return SchemaHydrator.hydrate(questionnaireMetadata);
+  //       } else {
+  //         return false;
+  //       }
+  //     } else {
+  //       return false;
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  // },
   isNewRecord: function (){
     if (this._id){
       return false;
@@ -133,9 +157,9 @@ Template.recordUpsertPage.events({
 });
 
 
-Template.recordUpsertPage.saveRecord = function (record, questionnaire){
+Template.recordUpsertPage.saveRecord = function (record, metadata){
 
-  console.log("Template.recordUpsertPage.saveRecords.", questionnaire);
+  console.log("Template.recordUpsertPage.saveRecords.", metadata);
   // TODO:  add validation functions
 
   var newRecord = {};
@@ -153,21 +177,27 @@ Template.recordUpsertPage.saveRecord = function (record, questionnaire){
   }
 
   newRecord.createdAt = new Date();
-  newRecord.questionnaireId = questionnaire._id;
+  newRecord.questionnaireId = metadata._id;
+  newRecord.questionnaireName = metadata.commonName;
 
   console.log ("newRecord", newRecord);
 
 
   if (record._id){
     Records.update({_id: record._id}, {$set: newRecord }, function (error, result){
-      if (error) console.log(error);
+      if (error) {
+        console.log(error);
+        Session.set('errorMessage', error);
+      }
       Router.go('/view/record/' + record._id);
     });
   } else {
     Records.insert(newRecord, function (error, result){
-      if (error) console.log(error);
+      if (error) {
+        console.log(error);
+        Session.set('errorMessage', error);
+      }
       Router.go('/list/records');
-      //Router.go('/view/record/' + result);
     });
   }
 };
