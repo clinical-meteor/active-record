@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:active-record',
-  version: '1.0.16',
+  version: '1.0.18',
   summary: 'ActiveRecord component for the ClinicalFramework; provides CRUD pattern using Autoform.',
   git: 'http://github.com/UCSC-MedBook/medbook-active-record/',
   documentation: 'README.md'

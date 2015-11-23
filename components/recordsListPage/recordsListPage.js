@@ -73,12 +73,6 @@ Template.recordsListPage.events({
 Template.recordsListPage.helpers({
   getQuestionnaireName: function () {
     return this.questionnaireName;
-    // var questionnaire = Metadata.findOne({_id: this.questionnaireId});
-    // if (questionnaire) {
-    //   return questionnaire.commonName;
-    // } else {
-    //   return "---";
-    // }
   },
   getRecordSearchFilter: function () {
     return Session.get('recordSearchFilter');

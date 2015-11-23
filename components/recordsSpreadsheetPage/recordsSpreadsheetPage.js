@@ -133,7 +133,7 @@ Template.recordsSpreadsheetPage.rendered = function (){
       // step F:  update the tablesorting library 200ms after receiving data
       // and Blaze has had a change to rerender the table
       // $("#recordsTable").trigger("update");
-      $(this.find('#recordsSpreadsheet')).handsontable({
+      $('#recordsSpreadsheet').handsontable({
         formulas: true, // Add this line to enable formulas support
         data: Records.getFilteredData().fetch(),
         minSpareRows: 1,
@@ -156,7 +156,8 @@ Template.recordsSpreadsheetPage.rendered = function (){
           //     exampleConsole.innerText ='Changes will be autosaved';
           //   }, 1000);
           // });
-        }
+        },
+        colHeaders: ['Apple', 'Banana', 'Coconut']
       });
     }, 200);
   });
