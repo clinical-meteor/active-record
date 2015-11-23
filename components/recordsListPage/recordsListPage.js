@@ -69,8 +69,14 @@ Template.recordsListPage.events({
 // TEMPLATE OUTPUTS
 
 
-
 Template.recordsListPage.helpers({
+  getMrn: function (){
+    if (this.MedicalRecordNumber) {
+      return this.MedicalRecordNumber;
+    } else {
+      return this["Patient_ID"];
+    }
+  },
   getQuestionnaireName: function () {
     return this.questionnaireName;
   },
