@@ -55,4 +55,13 @@ describe('clinical:active-record', function () {
       expect(ActiveRecord).to.exist;
     });
   });
+
+  it("ActiveRecord is visible by default.", function () {
+    return client.execute(function () {
+      var activeRecord = new ActiveRecord("test");
+      expect(activeRecord.recordKey).to.equal("test");
+      expect(activeRecord.state.visible).to.be.true;
+    });
+  });
+
 });
