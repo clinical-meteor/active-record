@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:active-record',
-  version: '1.1.1',
+  version: '1.1.2',
   summary: 'ActiveRecord component for the ClinicalFramework; provides CRUD pattern using Autoform.',
   git: 'http://github.com/UCSC-MedBook/medbook-active-record/',
   documentation: 'README.md'
@@ -20,10 +20,7 @@ Package.onUse(function (api) {
   api.use('awsp:handsontable@0.11.0');
   api.use('clinical:autoform@6.7.3');
 
-  //api.imply('aldeed:simple-schema@1.3.3');
-  //api.imply('aldeed:collection2@2.3.3');
-
-  api.use('clinical:router@2.0.13');
+  api.use('clinical:router@2.0.17');
 
   api.addFiles([
     'lib/ActiveRecord.js',
